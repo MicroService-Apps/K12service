@@ -1,0 +1,10 @@
+{"TableName":"K12","ProjectionExpression":"#uni,LastName,FirstName,IQ,ShoeSize,SSN"}
+{"TableName":"K12","ProjectionExpression":"#uni,LastName,FirstName,IQ,ShoeSize,SSN"}
+{"TableName":"K12"}
+{"TableName":"K12"}
+{"TableName":"K12"}
+{"TableName":"K12"}
+{"TableName":"K12"}
+{"TableName":"K12"}
+{"TableName":"K12","ProjectionExpression":"#uni"}
+{"TableName":"K12"}
