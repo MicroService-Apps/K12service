@@ -60,3 +60,26 @@
 {"TableName":"K12","Key":{"uni":"ss0123"},"UpdateExpression":"set SSN  = :keyValue ","ExpressionAttributeValues":{":keyValue":"adsfasqfe"},"ReturnValues":"UPDATED_NEW"}
 {"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"ss0123"}}
 {"TableName":"K12","Key":{"uni":"ss0123"},"UpdateExpression":"set ShoeSize  = :keyValue ","ExpressionAttributeValues":{":keyValue":"8"},"ReturnValues":"UPDATED_NEW"}
+{"TableName":"K12","Item":{"uni":"a122","LastName":"NULL","FirstName":"NULL","IQ":"NULL","SSN":"NULL","ShoeSize":"NULL"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","Key":{"uni":"a122"},"UpdateExpression":"set IQ  = :keyValue ","ExpressionAttributeValues":{":keyValue":"190"},"ReturnValues":"UPDATED_NEW"}
+{"TableName":"K12","Key":{"uni":"a122"},"UpdateExpression":"set LastName  = :keyValue ","ExpressionAttributeValues":{":keyValue":"Xu"},"ReturnValues":"UPDATED_NEW"}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","Key":{"uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","Item":{"uni":"a122","LastName":"NULL","FirstName":"NULL","IQ":"NULL","SSN":"NULL","ShoeSize":"NULL"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","Key":{"uni":"a122"},"UpdateExpression":"set FirstName  = :keyValue ","ExpressionAttributeValues":{":keyValue":"Xu"},"ReturnValues":"UPDATED_NEW"}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","Key":{"uni":"a122"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a122"}}
+{"TableName":"K12","Item":{"uni":"a124","LastName":"NULL","FirstName":"NULL","IQ":"NULL","SSN":"100","ShoeSize":"NULL"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a124"}}
+{"TableName":"K12","Key":{"uni":"a124"},"UpdateExpression":"set LastName  = :keyValue ","ExpressionAttributeValues":{":keyValue":"Xu"},"ReturnValues":"UPDATED_NEW"}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a124"}}
+{"TableName":"K12","KeyConditionExpression":"#uni = :uni","ExpressionAttributeNames":{"#uni":"uni"},"ExpressionAttributeValues":{":uni":"a124"}}

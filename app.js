@@ -27,9 +27,6 @@ app.get('/K12/:uni', student.readStudent);
 app.put('/k12/:uni', student.createStudent);
 app.post('/K12/:uni', student.updateStudent);
 app.delete('/K12/:uni', student.deleteStudent);
-app.patch('/K12/revert', student.revert);
-app.patch('/K12/add/:field', student.addField);
-app.patch('/K12/delete/:field', student.deleteField);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

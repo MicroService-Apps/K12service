@@ -2,7 +2,6 @@
  * This file is for action in course service, including CRUD
  */
 var AWS = require("aws-sdk");
-var fs = require('fs');
 
 AWS.config.update({
     region: "us-west-2",
@@ -12,12 +11,11 @@ AWS.config.update({
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 
 var qs = require('querystring');
-var lr = require("line-reader");
-var path = require('path');
 var log = require('./../utils/logMessage');
 
 var serviceType = 'K12';
 var tableName = "K12";
+
 // handle create a new student
 exports.createStudent = function(req, res) {
     //console.log("In createStudent function");
@@ -103,165 +101,6 @@ exports.updateStudent = function(req, res) {
 
         // update student
         updateStudent(res, params);
-    });
-};
-
-
-// handle revert the last operation
-exports.revert = function(req, res) {
-    var file = 'log/' + serviceType + '.log';
-
-    lr.eachLine(path.join(path.dirname(__dirname), file), function(line, last) {
-        if (last) {
-            console.log(line);
-
-            // handle revert
-            var history = JSON.parse(line);
-            var operation = history.operation;
-            var params = history;
-
-            // get mongoDB collection
-            var student = db.collection(serviceType);
-
-            switch(operation) {
-                case log.ADD_STUDENT:
-                    // revert add student
-                    params.operation = log.DELETE_STUDENT;
-                    deleteStudent(res, params, student);
-
-                    break;
-                case log.DELETE_STUDENT:
-                    // revert delete student
-                    params.operation = log.ADD_STUDENT;
-                    insertStudent(res, params, student);
-
-                    break;
-                case log.UPDATE_STUDENT:
-                    // revert update
-                    updateStudent(res, params.oldParam, student);
-
-                    break;
-                case log.ADD_COURSE_INTO_STUDENT:
-                    // revert add course to course list
-                    params.operation = log.DELETE_COURSE_FROM_STUDENT;
-                    deleteCourse(res, params, student);
-
-                    break;
-                case log.DELETE_COURSE_FROM_STUDENT:
-                    // revert delete course from course list
-                    console.log(params);
-
-                    params.operation = log.ADD_COURSE_INTO_STUDENT;
-                    insertCourse(res, params, student);
-
-                    break;
-                default:
-                    res.send('can not revert last operation');
-
-                    break;
-            }
-        }
-    });
-};
-
-// handle configuration, add field
-exports.addField = function(req, res) {
-    // get parameters
-    var field = req.params.field;
-    var fieldValue = "NULL";
-    var response = new Object();
-
-    //log operation
-    var logParam = new Object();
-    logParam.operation = log.ADD_FIELD;
-    logParam.field = field;
-
-    var params = {
-        TableName : tableName
-    };
-    dynamodbDoc.scan(params, function(err, results) {
-        if(err) {
-            response.status = "failed";
-            console.log("query failed"+JSON.stringify(err, null, 2));
-            response.message = JSON.stringify(err, null, 2);
-            return;
-        } else {
-            var items = results.body.Items;
-
-            for (var index = 0; index < items.length; ++index) {
-                var getData = items[index];
-                var uniSet = qs.parse(getData);
-                var uni = uniSet.uni;
-                //add new field
-                var params = {
-                    TableName: tableName,
-                    Key: {
-                        "uni": uni
-                    },
-                    UpdateExpression: "set " + field + "  = :keyValue ",
-                    ExpressionAttributeValues: {
-                        ":keyValue": fieldValue
-                    },
-                    ReturnValues: "UPDATED_NEW"
-                }
-                dynamodbDoc.update(params, function (err, data) {
-                    if (err) {
-                        response.status = "failed";
-                        response.message = JSON.stringify(err, null, 2);
-                        console.error("Unable to add field. Error JSON:", JSON.stringify(err, null, 2));
-                        res.send(response);
-                        return;
-                    }
-                });
-            }
-
-                //add field success
-                response.status = "succeed";
-                response.message = "field: "+ field + " has been added";
-                // log operation
-                log.logMsg(JSON.stringify(logParam)+"\n", serviceType);
-
-                // send back message
-                res.send(response);
-        }
-    });
-};
-
-// handle configuration, delete field
-exports.deleteField = function(req, res) {
-    // get parameters
-    var field = req.params.field;
-    var fieldParams = new Object();
-    fieldParams[field]="";
-
-    var logParam = new Object();
-    logParam.operation = log.DELETE_FIELD;
-    logParam.field = field;
-
-    // get mongoDB collection
-    var student = db.collection(serviceType);
-
-    //add new field
-    var response = new Object();
-    student.update({},{$unset: fieldParams },{multi:true}, function (err,result) {
-        if (err) { // error situation
-            response.status = "failed";
-            response.message = err.toSring();
-            res.send(response);
-
-            return;
-        }
-
-        if(result){
-            response.status = "succeed";
-            response.message = "field: "+ field + " has been removed";
-
-            // log operation
-            log.logMsg(JSON.stringify(logParam)+"\n", serviceType);
-
-            // send back message
-            res.send(response);
-        }
     });
 };
 
